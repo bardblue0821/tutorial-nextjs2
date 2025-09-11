@@ -4,7 +4,7 @@ import {
   customers,
   revenue,
   users,
-} from '../app/lib/placeholder-data.js';
+} from '../src/app/lib/placeholder-data.js';
 import bcrypt from 'bcryptjs';
 
 async function seedUsers(client) {

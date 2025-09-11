@@ -7,7 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node -r dotenv/config ./scripts/seed.mjs"
+    "seed": "node -r dotenv/config ./scripts/seed.mjs",
+    "test-db": "node -r dotenv/config ./scripts/test-db.mjs"
   },
   "dependencies": {
     "@vercel/postgres": "^0.10.0",
