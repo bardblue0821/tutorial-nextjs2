@@ -2,6 +2,7 @@
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();   // Get URL params e.g. xxx?q=keyword&page=2
@@ -13,8 +14,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
   // term に <input> で入力された文字列が代入される
   // 検索ワードが「apple」なら、URLは /今のページ?query=apple
   // 検索ワードが空なら、queryが消えて /今のページ
-  function handleSearch(term: string) { 
+  const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams); // クエリ文字列を「名前」と「値」のペアに分解しオブジェクトに変換
+    params.set('page', '1');
     if (term) { // 
       params.set('query', term);
     } else {
@@ -22,7 +24,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     }
     console.log(params.toString());
     replace(`${pathname}?${params.toString()}`);
-  }
+  }, 300);
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
